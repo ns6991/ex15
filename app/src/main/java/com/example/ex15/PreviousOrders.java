@@ -57,13 +57,13 @@ public class PreviousOrders extends AppCompatActivity implements  AdapterView.On
 
         hlp = new HelperDB(this);
 
-        lv = (ListView) findViewById(R.id.wl);
+        lv = (ListView) findViewById(R.id.ol);
         lv.setOnItemClickListener(this);
         lv.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
 
         update_orders(sort);
 
-        spin = (Spinner) findViewById(R.id.options2);
+        spin = (Spinner) findViewById(R.id.options);
         spin.setOnItemSelectedListener(this);
         ArrayAdapter<String> adp = new ArrayAdapter<String>(this, R.layout.support_simple_spinner_dropdown_item, sortAD);
         spin.setAdapter(adp);

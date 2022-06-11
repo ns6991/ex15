@@ -15,6 +15,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.Switch;
@@ -32,7 +33,8 @@ public class Restaurant extends AppCompatActivity implements AdapterView.OnItemC
     HelperDB hlp;
     Cursor crsr;
 
-    TextView name, ph1 , ph2 , tax;
+    TextView  tax;
+    EditText name, ph1 , ph2 ;
     Button update;
     Switch active, filter;
 
@@ -42,16 +44,16 @@ public class Restaurant extends AppCompatActivity implements AdapterView.OnItemC
 
     String userKeyId = "";
     final String[] sortAD = {"Card-ID", "Name A→Z","Name Z→A"};
-    String sort;
+    String sort , filterPar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_restaurant);
 
-        name = (TextView) findViewById(R.id.nR);
-        ph1 = (TextView) findViewById(R.id.p1);
-        ph2 = (TextView) findViewById(R.id.p2);
+        name = (EditText) findViewById(R.id.nR);
+        ph1 = (EditText) findViewById(R.id.p1);
+        ph2 = (EditText) findViewById(R.id.p2);
         tax = (TextView) findViewById(R.id.tax);
 
         update = (Button) findViewById(R.id.updateRes);
@@ -60,7 +62,7 @@ public class Restaurant extends AppCompatActivity implements AdapterView.OnItemC
 
         hlp = new HelperDB(this);
 
-        lv = (ListView) findViewById(R.id.wl);
+        lv = (ListView) findViewById(R.id.rl);
         lv.setOnItemClickListener(this);
         lv.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
 
@@ -80,6 +82,7 @@ public class Restaurant extends AppCompatActivity implements AdapterView.OnItemC
     }
 
     private void update_comps( String sort) {
+
         name.setEnabled(false);
         ph1.setEnabled(false);
         ph2.setEnabled(false);
@@ -90,7 +93,10 @@ public class Restaurant extends AppCompatActivity implements AdapterView.OnItemC
         tbl = new ArrayList<>();
         cardIDs = new ArrayList<>();
 
-        crsr = db.query(Restaurant1.TABLE_RESTAURANT, null, null, null, null, null, sort);
+        if (filterPar != null)
+            crsr = db.query(Restaurant1.TABLE_RESTAURANT, null, Restaurant1.ACTIVE + "=?", new String[]{filterPar}, null, null, sort);
+        else
+            crsr = db.query(Restaurant1.TABLE_RESTAURANT, null, null, null, null, null, sort);
 
         int col1 = crsr.getColumnIndex(Restaurant1.KEY_ID);
         int col2 = crsr.getColumnIndex(Restaurant1.NAME);
@@ -116,14 +122,18 @@ public class Restaurant extends AppCompatActivity implements AdapterView.OnItemC
     }
 
     public void updateButton(View view) {
+
         if (update.getText().toString().equals("UPDATE")) {
             Toast.makeText(this, "please change the info above as you want", Toast.LENGTH_LONG).show();
 
             update.setText("SAVE");
             tax.setEnabled(false);
             name.setEnabled(true);
+            name.setHint("name");
             ph1.setEnabled(true);
+            ph1.setHint("first phone number");
             ph2.setEnabled(true);
+            ph2.setHint("second phone number");
             active.setEnabled(true);
 
         } else if (update.getText().toString().equals("SAVE")) {
@@ -208,7 +218,7 @@ public class Restaurant extends AppCompatActivity implements AdapterView.OnItemC
         name.setText(crsr.getString(col1));
         ph1.setText(crsr.getString(col2));
         ph2.setText(crsr.getString(col3));
-        tax.setText(crsr.getString(col0));
+        tax.setText("tax number: " +crsr.getString(col0));
 
         active.setChecked(crsr.getString(col4).equals("1"));
 
@@ -232,5 +242,13 @@ public class Restaurant extends AppCompatActivity implements AdapterView.OnItemC
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
 
+    }
+    public void isClicked1(View view) {
+        if (filter.isChecked()) {
+            filterPar ="1";
+        }
+        else
+            filterPar = "0";
+        update_comps(sort);
     }
 }

@@ -31,7 +31,8 @@ public class WorkersList extends AppCompatActivity implements AdapterView.OnItem
     SQLiteDatabase db;
     HelperDB hlp;
     Cursor crsr;
-    TextView fn, ln, idW, phN, comp, cardNum;
+    EditText fn, ln, phN, comp;
+    TextView  idW, cardNum;
     Switch active, filter;
     Button update;
 
@@ -41,18 +42,18 @@ public class WorkersList extends AppCompatActivity implements AdapterView.OnItem
 
     String userKeyId = "";
     final String[] sortAD = {"Card-ID", "First Name A→Z", "Last Name A→Z", "Company A→Z"};
-    String sort;
+    String sort,filterPar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_workers_list);
 
-        fn = (TextView) findViewById(R.id.fnameW);
-        ln = (TextView) findViewById(R.id.snameW);
+        fn = (EditText) findViewById(R.id.fnameW);
+        ln = (EditText) findViewById(R.id.snameW);
         idW = (TextView) findViewById(R.id.idW);
-        phN = (TextView) findViewById(R.id.phoneW);
-        comp = (TextView) findViewById(R.id.compW);
+        phN = (EditText) findViewById(R.id.phoneW);
+        comp = (EditText) findViewById(R.id.compW);
         cardNum = (TextView) findViewById(R.id.cardNumW);
 
         update = (Button) findViewById(R.id.updateWo);
@@ -94,7 +95,11 @@ public class WorkersList extends AppCompatActivity implements AdapterView.OnItem
         cardIDs = new ArrayList<>();
 
 
-        crsr = db.query(Worker1.WORKERS_TABLE, null, null, null, null, null, sortPar);
+        if (filterPar != null)
+            crsr = db.query(Worker1.WORKERS_TABLE, null, Worker1.ACTIVE + "=?", new String[]{filterPar}, null, null, sort);
+        else
+            crsr = db.query(Worker1.WORKERS_TABLE, null, null, null, null, null, sort);
+
         int col1 = crsr.getColumnIndex(Worker1.KEY_ID);
         int col2 = crsr.getColumnIndex(Worker1.FIRST_NAME);
         int col3 = crsr.getColumnIndex(Worker1.LAST_NAME);
@@ -124,11 +129,15 @@ public class WorkersList extends AppCompatActivity implements AdapterView.OnItem
             Toast.makeText(this, "please change the info above as you want", Toast.LENGTH_LONG).show();
             fn.setEnabled(true);
             ln.setEnabled(true);
-            idW.setEnabled(true);
+            idW.setEnabled(false);
             phN.setEnabled(true);
             comp.setEnabled(true);
             active.setEnabled(true);
             cardNum.setEnabled(false);
+            fn.setHint("first name");
+            ln.setHint("last name");
+            phN.setHint("phone number");
+            comp.setHint("company");
 
         } else if (update.getText().toString().equals("SAVE")) {
             ContentValues cv = new ContentValues();
@@ -193,6 +202,7 @@ public class WorkersList extends AppCompatActivity implements AdapterView.OnItem
         active.setEnabled(false);
         cardNum.setEnabled(false);
 
+
         userKeyId = cardIDs.get(position);
         String[] selectionArgs = {userKeyId};
 
@@ -213,7 +223,7 @@ public class WorkersList extends AppCompatActivity implements AdapterView.OnItem
         idW.setText(crsr.getString(col4));
         phN.setText(crsr.getString(col5));
         comp.setText(crsr.getString(col3));
-        cardNum.setText(crsr.getString(col0));
+        cardNum.setText("card number: " + crsr.getString(col0));
         active.setChecked(crsr.getString(col6).equals("1"));
 
         db.close();
@@ -243,10 +253,11 @@ public class WorkersList extends AppCompatActivity implements AdapterView.OnItem
 
     public void isClicked1(View view) {
         if (filter.isChecked()) {
-            crsr = db.query(Worker1.WORKERS_TABLE, null, Worker1.ACTIVE + "=?", new String[]{"1"}, null, null, sort);
+            filterPar ="1";
         }
         else
-            crsr = db.query(Worker1.WORKERS_TABLE, null, Worker1.ACTIVE + "=?", new String[]{"0"}, null, null, sort);
+            filterPar = "0";
+        update_users(sort);
 
     }
 

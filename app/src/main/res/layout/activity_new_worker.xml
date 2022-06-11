@@ -31,6 +31,7 @@
                 android:layout_height="0dp"
                 android:layout_weight="5"
                 android:text="NEW WORKER"
+                android:textColor="#005C04"
                 android:textSize="24sp"
                 android:textStyle="bold" />
 
@@ -46,7 +47,8 @@
                 android:layout_weight="5"
                 android:ems="10"
                 android:hint="first name"
-                android:inputType="textPersonName" />
+                android:inputType="textPersonName"
+                android:textSize="12sp" />
 
             <Space
                 android:layout_width="match_parent"
@@ -60,7 +62,8 @@
                 android:layout_weight="5"
                 android:ems="10"
                 android:hint="last name"
-                android:inputType="textPersonName" />
+                android:inputType="textPersonName"
+                android:textSize="12sp" />
 
             <Space
                 android:layout_width="match_parent"
@@ -74,7 +77,8 @@
                 android:layout_weight="5"
                 android:ems="10"
                 android:hint="work company"
-                android:inputType="textPersonName" />
+                android:inputType="textPersonName"
+                android:textSize="12sp" />
 
             <Space
                 android:layout_width="match_parent"
@@ -88,7 +92,8 @@
                 android:layout_weight="5"
                 android:ems="10"
                 android:hint="ID"
-                android:inputType="textPersonName" />
+                android:inputType="textPersonName"
+                android:textSize="12sp" />
 
             <Space
                 android:layout_width="match_parent"
@@ -102,7 +107,8 @@
                 android:layout_weight="5"
                 android:ems="10"
                 android:hint="phone number"
-                android:inputType="textPersonName" />
+                android:inputType="textPersonName"
+                android:textSize="12sp" />
 
             <Space
                 android:layout_width="match_parent"
@@ -123,7 +129,7 @@
                     android:background="#FFFFFF"
                     android:onClick="newWorOC"
                     android:text="SUBMIT"
-                    android:textSize="18sp"
+                    android:textSize="14sp"
                     app:backgroundTint="#B1F167" />
 
                 <Space
@@ -138,7 +144,7 @@
                     android:layout_weight="40"
                     android:onClick="cencelbk"
                     android:text="CENCEL"
-                    android:textSize="18sp"
+                    android:textSize="14sp"
                     app:backgroundTint="#B1F167" />
             </LinearLayout>
 

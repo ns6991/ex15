@@ -31,6 +31,7 @@
                 android:layout_height="0dp"
                 android:layout_weight="5"
                 android:text="RESTAURANTS"
+                android:textColor="#005C04"
                 android:textSize="24sp"
                 android:textStyle="bold" />
 
@@ -61,6 +62,7 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="40"
+                    android:onClick="isClicked1"
                     android:text="Active" />
 
                 <Space
@@ -104,43 +106,52 @@
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
                         android:layout_weight="10"
-                        android:hint="id number" />
+                        android:textColor="#000000" />
 
                     <Space
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
                         android:layout_weight="5" />
 
-                    <TextView
+                    <EditText
                         android:id="@+id/nR"
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
                         android:layout_weight="10"
-                        android:hint="name" />
+                        android:ems="10"
+                        android:inputType="textPersonName"
+                        android:text="Name"
+                        android:textSize="14sp" />
 
                     <Space
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
                         android:layout_weight="5" />
 
-                    <TextView
+                    <EditText
                         android:id="@+id/p1"
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
                         android:layout_weight="10"
-                        android:hint="first phone number" />
+                        android:ems="10"
+                        android:inputType="textPersonName"
+                        android:text="Name"
+                        android:textSize="14sp" />
 
                     <Space
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
                         android:layout_weight="5" />
 
-                    <TextView
+                    <EditText
                         android:id="@+id/p2"
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
                         android:layout_weight="10"
-                        android:hint="second phone number" />
+                        android:ems="10"
+                        android:inputType="textPersonName"
+                        android:text="Name"
+                        android:textSize="14sp" />
 
                     <Space
                         android:layout_width="match_parent"
@@ -152,7 +163,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
                         android:layout_weight="5"
-                        android:text="Active" />
+                        android:text="Active"
+                        android:textColor="#000000" />
 
                     <Space
                         android:layout_width="match_parent"
@@ -166,7 +178,7 @@
                         android:layout_weight="15"
                         android:onClick="updateButton"
                         android:text="UPDATE"
-                        android:textSize="18sp"
+                        android:textSize="14sp"
                         app:backgroundTint="#B1F167" />
 
                 </LinearLayout>
@@ -185,7 +197,7 @@
                 android:layout_weight="10"
                 android:onClick="addRes"
                 android:text="ADD RESTAURANT"
-                android:textSize="24sp"
+                android:textSize="18sp"
                 app:backgroundTint="#4CAF50" />
 
             <Space

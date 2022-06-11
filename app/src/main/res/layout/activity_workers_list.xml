@@ -31,6 +31,7 @@
                 android:layout_height="0dp"
                 android:layout_weight="5"
                 android:text="WORKERS LIST"
+                android:textColor="#005C04"
                 android:textSize="24sp"
                 android:textStyle="bold" />
 
@@ -101,48 +102,56 @@
                     android:layout_weight="20"
                     android:orientation="vertical">
 
-                    <TextView
+                    <EditText
                         android:id="@+id/fnameW"
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
                         android:layout_weight="10"
-                        android:hint="first name" />
+                        android:ems="10"
+                        android:inputType="textPersonName"
+                        android:textSize="12sp" />
 
                     <Space
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
                         android:layout_weight="5" />
 
-                    <TextView
+                    <EditText
                         android:id="@+id/snameW"
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
                         android:layout_weight="10"
-                        android:hint="last name" />
+                        android:ems="10"
+                        android:inputType="textPersonName"
+                        android:textSize="12sp" />
 
                     <Space
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
                         android:layout_weight="5" />
 
-                    <TextView
+                    <EditText
                         android:id="@+id/compW"
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
                         android:layout_weight="10"
-                        android:hint="company" />
+                        android:ems="10"
+                        android:inputType="textPersonName"
+                        android:textSize="12sp" />
 
                     <Space
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
                         android:layout_weight="5" />
 
-                    <TextView
+                    <EditText
                         android:id="@+id/phoneW"
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
                         android:layout_weight="10"
-                        android:hint="phone number" />
+                        android:ems="10"
+                        android:inputType="textPersonName"
+                        android:textSize="12sp" />
 
                     <Space
                         android:layout_width="match_parent"
@@ -154,7 +163,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
                         android:layout_weight="10"
-                        android:hint="id of worker" />
+                        android:textColor="#000000"
+                        android:textSize="12sp" />
 
                     <Space
                         android:layout_width="match_parent"
@@ -166,7 +176,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
                         android:layout_weight="10"
-                        android:hint="card number" />
+                        android:textColor="#000000"
+                        android:textSize="12sp" />
 
                     <Space
                         android:layout_width="match_parent"
@@ -177,7 +188,8 @@
                         android:id="@+id/switch1"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Active" />
+                        android:text="Active"
+                        android:textColor="#000000" />
 
                     <Button
                         android:id="@+id/updateWo"
@@ -186,7 +198,7 @@
                         android:layout_weight="15"
                         android:onClick="updateButton"
                         android:text="UPDATE"
-                        android:textSize="18sp"
+                        android:textSize="14sp"
                         app:backgroundTint="#B1F167" />
                 </LinearLayout>
 
@@ -204,7 +216,7 @@
                 android:layout_weight="10"
                 android:onClick="newWorkerOC"
                 android:text="ADD WORKER"
-                android:textSize="24sp"
+                android:textSize="18sp"
                 app:backgroundTint="#4CAF50" />
 
             <Space

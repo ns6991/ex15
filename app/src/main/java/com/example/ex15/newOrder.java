@@ -53,6 +53,7 @@ public class newOrder extends AppCompatActivity implements AdapterView.OnItemSel
         restIDlist = new ArrayList<>();
         restIDlist.add("0");
 
+        hlp = new HelperDB(this);
         db = hlp.getWritableDatabase();
         tbl = new ArrayList<>();
         tbl.add("Choose Restaurant:");

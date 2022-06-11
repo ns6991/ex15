@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.ContentValues;
 import android.content.Intent;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
@@ -18,6 +19,7 @@ public class newWorker extends AppCompatActivity {
     EditText idET, fnameET, lnameET, companyET, phoneET;
     String id, a;
     ContentValues cv;
+    Cursor crsr;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +43,7 @@ public class newWorker extends AppCompatActivity {
     }
 
     public void newWorOC(View view) {
+
         if (checkValid()) {
 
             cv.put(Worker1.WORKER_ID, idET.getText().toString());
@@ -61,7 +64,11 @@ public class newWorker extends AppCompatActivity {
     }
     private boolean checkValid(){
         int no =0;
-        if (!isValidId(idET.toString())) {
+        if(!isExist(idET.getText().toString())){
+            Toast.makeText(this, "User already exist", Toast.LENGTH_LONG).show();
+            no++;
+        }
+        if (!isValidId(idET.getText().toString())) {
             idET.setError("enter valid id");
             no++;
         }
@@ -90,43 +97,33 @@ public class newWorker extends AppCompatActivity {
         return true;
     }
 
+    private boolean isExist(String str){
+        String[] selectionArgs = {str};
 
+        db = hlp.getReadableDatabase();
+        crsr = db.query(Worker1.WORKERS_TABLE, null, Worker1.WORKER_ID + "=?", selectionArgs, null, null, null);
+        return crsr!=null;
+    }
 
-
-
-
-
-
-
-
-
-
-
-
-    private boolean isValidId(String id){
-        if(id.length()>9)return false;
-        else{
-            for(int i=0; i < 9-id.length() ;i++){
-                id = "0"+id;
-            }
+    private static boolean isValidId(String str){
+        if (str.length() > 9) return false;
+        int x;
+        int sum = 0;
+        int len = 9 - str.length();
+        for (int i = 0; i < len; i++) {
+            str = "0" + str;
         }
-        int sum =0;
-        int temp =0;
-        for(int i =0;i<id.length();i++){
-            temp =0;
-            if(i%2 ==0){
-                temp = Integer.parseInt(id.charAt(i)+"");
-                if(temp>9) sum+= ((temp/10 )+ (temp%10));
-                else sum+= temp;
+        for (int i = 0; i < str.length(); i++) {
+            try {
+                x = Integer.parseInt(str.substring(i, i + 1));
+            } catch (Exception e) {
+                return false;
             }
-            else{
-                temp = (Integer.parseInt(id.charAt(i)+""))*2;
-                if(temp>9) sum+= ((temp/10 )+ (temp%10));
-                else sum+= temp;
-            }
+            if (i % 2 == 1) x = x * 2;
+            if (x > 9) x = x % 10 + x / 10;
+            sum += x;
         }
-        if(sum%10==0)return true;
-        return false;
+        return sum % 10 == 0;
     }
 
 

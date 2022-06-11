@@ -31,7 +31,7 @@
                 android:layout_height="0dp"
                 android:layout_weight="5"
                 android:text="NEW ORDER"
-                android:textColor="#000000"
+                android:textColor="#005C04"
                 android:textSize="24sp"
                 android:textStyle="bold" />
 
@@ -58,7 +58,8 @@
                 android:layout_weight="5"
                 android:ems="10"
                 android:hint="first meal"
-                android:inputType="textPersonName" />
+                android:inputType="textPersonName"
+                android:textSize="12sp" />
 
             <Space
                 android:layout_width="match_parent"
@@ -72,7 +73,8 @@
                 android:layout_weight="5"
                 android:ems="10"
                 android:hint="main meal"
-                android:inputType="textPersonName" />
+                android:inputType="textPersonName"
+                android:textSize="12sp" />
 
             <Space
                 android:layout_width="match_parent"
@@ -86,7 +88,8 @@
                 android:layout_weight="5"
                 android:ems="10"
                 android:hint="extra meal"
-                android:inputType="textPersonName" />
+                android:inputType="textPersonName"
+                android:textSize="12sp" />
 
             <Space
                 android:layout_width="match_parent"
@@ -100,7 +103,8 @@
                 android:layout_weight="5"
                 android:ems="10"
                 android:hint="dessert"
-                android:inputType="textPersonName" />
+                android:inputType="textPersonName"
+                android:textSize="12sp" />
 
             <Space
                 android:layout_width="match_parent"
@@ -114,7 +118,8 @@
                 android:layout_weight="5"
                 android:ems="10"
                 android:hint="drink"
-                android:inputType="textPersonName" />
+                android:inputType="textPersonName"
+                android:textSize="12sp" />
 
             <Space
                 android:layout_width="match_parent"
@@ -128,7 +133,8 @@
                 android:layout_weight="5"
                 android:ems="10"
                 android:hint="worker card number"
-                android:inputType="textPersonName" />
+                android:inputType="textPersonName"
+                android:textSize="12sp" />
 
             <Space
                 android:layout_width="match_parent"
@@ -148,7 +154,7 @@
                     android:layout_weight="40"
                     android:onClick="cancelBK"
                     android:text="cancel"
-                    android:textSize="18sp"
+                    android:textSize="14sp"
                     app:backgroundTint="#B1F167" />
 
                 <Space
@@ -163,7 +169,7 @@
                     android:layout_weight="40"
                     android:onClick="submitOrder"
                     android:text="SUBMIT"
-                    android:textSize="18sp"
+                    android:textSize="14sp"
                     app:backgroundTint="#B1F167" />
             </LinearLayout>
 
