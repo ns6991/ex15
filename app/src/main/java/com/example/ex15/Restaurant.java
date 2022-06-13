@@ -137,22 +137,28 @@ public class Restaurant extends AppCompatActivity implements AdapterView.OnItemC
             active.setEnabled(true);
 
         } else if (update.getText().toString().equals("SAVE")) {
-            ContentValues cv = new ContentValues();
-            db = hlp.getWritableDatabase();
-            cv.put(Restaurant1.NAME, name.getText().toString());
+            if(checkValid()){
+                ContentValues cv = new ContentValues();
+                db = hlp.getWritableDatabase();
+                cv.put(Restaurant1.NAME, name.getText().toString());
 
-            cv.put(Restaurant1.MAIN_PHONE, ph1.getText().toString());
-            cv.put(Restaurant1.SECONDARY_PHONE, ph2.getText().toString());
-            db.update(Restaurant1.TABLE_RESTAURANT, cv, Worker1.KEY_ID + "=?",  new String[]{userKeyId});
+                cv.put(Restaurant1.MAIN_PHONE, ph1.getText().toString());
+                cv.put(Restaurant1.SECONDARY_PHONE, ph2.getText().toString());
+                if(active.isChecked()) cv.put(Restaurant1.ACTIVE,"1");
+                else cv.put(Restaurant1.ACTIVE,"0");
 
-            db.close();
+                db.update(Restaurant1.TABLE_RESTAURANT, cv, Worker1.KEY_ID + "=?",  new String[]{userKeyId});
 
-            Toast.makeText(this, "Saved Successfully!", Toast.LENGTH_LONG).show();
-            update.setText("UPDATE");
-            name.setEnabled(false);
-            ph1.setEnabled(false);
-            ph2.setEnabled(false);
-            active.setEnabled(false);
+                db.close();
+
+                Toast.makeText(this, "Saved Successfully!", Toast.LENGTH_LONG).show();
+                update.setText("UPDATE");
+                name.setEnabled(false);
+                ph1.setEnabled(false);
+                ph2.setEnabled(false);
+                active.setEnabled(false);
+            }
+
 
         }
 
@@ -225,6 +231,35 @@ public class Restaurant extends AppCompatActivity implements AdapterView.OnItemC
         db.close();
         crsr.close();
     }
+
+    private boolean checkValid(){
+        int no =0;
+        if (name.getText().length() == 0 ) {
+            name.setError("Can't Be Empty");
+            no++;
+        }
+
+        if (!(ph1.getText().length() == 10) || ph1.getText().toString().charAt(0)!='0' || !(ph1.getText().toString().matches("[0-9]+") && ph1.getText().toString().length() > 2)) {
+            ph1.setError("Must Be 10 Digits Long and start with 0");
+
+            no++;
+        }
+        String s = ph2.getText().toString();
+        if (!ph2.getText().toString().isEmpty()) {
+            if((ph2.getText().length() <9)|| ph1.getText().toString().charAt(0)!='0' || !(ph2.getText().toString().matches("[0-9]+") && ph2.getText().length() > 2)){
+                ph2.setError("Must Be 9 or Digits Long");
+                no++;
+            }
+
+        }
+
+        if(no!=0){
+            Toast.makeText(this, "Error, please enter again..", Toast.LENGTH_LONG).show();
+            return false;
+        }
+        return true;
+    }
+
 
 
     @Override

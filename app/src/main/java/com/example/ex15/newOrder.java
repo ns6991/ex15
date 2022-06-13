@@ -95,29 +95,36 @@ public class newOrder extends AppCompatActivity implements AdapterView.OnItemSel
             db.insert(Meal1.MEALS_TABLE, null, cv);
             db.close();
 
+            db = hlp.getWritableDatabase();
             crsr = db.query(Worker1.WORKERS_TABLE, null, Worker1.KEY_ID + "=?", new String[]{worker_numberET.getText().toString()}, null, null, null);
             int col1 = crsr.getColumnIndex(Worker1.FIRST_NAME);
             crsr.moveToFirst();
             orderName = crsr.getString(col1);
             crsr.close();
+            db.close();
 
             db = hlp.getWritableDatabase();
+
+            cv = new ContentValues();
             cv.put(Order1.USER_ID, orderID);
             cv.put(Order1.RESTAURANT_ID, resID);
             cv.put(Order1.RESTAURANT_NAME,resName);
             cv.put(Order1.USER_NAME,orderName);
 
-
-
             Calendar calendar = Calendar.getInstance();
             SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yy HH:mm");
-            cv.put(Order1.DATE,formatter.format(calendar.getTime()));
+            String d = formatter.format(calendar.getTime()).substring(0,8);
+            String t =  formatter.format(calendar.getTime()).substring(9);
+            cv.put(Order1.DATE,d);
+            cv.put(Order1.TIME,t);
+
 
 
             db = hlp.getWritableDatabase();
             db.insert(Order1.TABLE_ORDERS, null, cv);
             db.close();
 
+            Toast.makeText(this, "Successful", Toast.LENGTH_LONG).show();
 
             si =new Intent(this,MainActivity.class);
             startActivity(si);
@@ -157,6 +164,10 @@ public class newOrder extends AppCompatActivity implements AdapterView.OnItemSel
 
     private boolean checkValid(){
         int no =0;
+        if(resID==null){
+            Toast.makeText(this, "you have to choose restaurant", Toast.LENGTH_LONG).show();
+            return false;
+        }
         if (first_mealET.getText().length() == 0) {
             first_mealET.setText("NO");
             no++;
@@ -181,7 +192,7 @@ public class newOrder extends AppCompatActivity implements AdapterView.OnItemSel
             worker_numberET.setError("Can't Be Empty.");
             return false;
         }
-        if(no==5){
+        if(no==5 ){
             Toast.makeText(this, "you have to order at least one thing..", Toast.LENGTH_LONG).show();
             return false;
         }

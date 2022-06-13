@@ -18,9 +18,9 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         iv = (ImageView) findViewById(R.id.logo);
-        iv.setImageResource(R.drawable.gavyam1);
+        iv.setImageResource(R.drawable.gavyam2);
         iv2 = (ImageView) findViewById(R.id.logo2);
-        iv2.setImageResource(R.drawable.grass1);
+        iv2.setImageResource(R.drawable.grass2);
     }
 
     public void newOrderOC(View view) {

@@ -72,7 +72,7 @@ public class newWorker extends AppCompatActivity {
             idET.setError("enter valid id");
             no++;
         }
-        if (!(phoneET.getText().length() == 10)) {
+        if (!(phoneET.getText().length() == 10) || phoneET.getText().toString().charAt(0)!='0' || !(phoneET.getText().toString().matches("[0-9]+") && phoneET.getText().toString().length() > 2)) {
             phoneET.setError("Must Be 10 Digits Long");
             no++;
         }

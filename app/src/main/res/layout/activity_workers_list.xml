@@ -8,7 +8,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:background="#E4F6FFC7">
 
         <Space
             android:layout_width="0dp"
@@ -114,7 +115,7 @@
                     <Space
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
-                        android:layout_weight="5" />
+                        android:layout_weight="2" />
 
                     <EditText
                         android:id="@+id/snameW"
@@ -128,7 +129,7 @@
                     <Space
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
-                        android:layout_weight="5" />
+                        android:layout_weight="2" />
 
                     <EditText
                         android:id="@+id/compW"
@@ -142,7 +143,7 @@
                     <Space
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
-                        android:layout_weight="5" />
+                        android:layout_weight="2" />
 
                     <EditText
                         android:id="@+id/phoneW"
@@ -156,7 +157,7 @@
                     <Space
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
-                        android:layout_weight="5" />
+                        android:layout_weight="2" />
 
                     <TextView
                         android:id="@+id/idW"
@@ -164,12 +165,12 @@
                         android:layout_height="0dp"
                         android:layout_weight="10"
                         android:textColor="#000000"
-                        android:textSize="12sp" />
+                        android:textSize="10sp" />
 
                     <Space
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
-                        android:layout_weight="5" />
+                        android:layout_weight="2" />
 
                     <TextView
                         android:id="@+id/cardNumW"
@@ -182,7 +183,7 @@
                     <Space
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
-                        android:layout_weight="5" />
+                        android:layout_weight="2" />
 
                     <Switch
                         android:id="@+id/switch1"

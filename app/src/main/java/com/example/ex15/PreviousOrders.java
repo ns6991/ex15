@@ -53,7 +53,7 @@ public class PreviousOrders extends AppCompatActivity implements  AdapterView.On
         dr = (TextView)findViewById(R.id.dO);
         dess = (TextView)findViewById(R.id.dsmO);
         date = (TextView)findViewById(R.id.dateO);
-        time = (TextView)findViewById(R.id.wrkO);
+        time = (TextView)findViewById(R.id.time);
 
         hlp = new HelperDB(this);
 
@@ -148,6 +148,7 @@ public class PreviousOrders extends AppCompatActivity implements  AdapterView.On
         int col4 = crsr.getColumnIndex(Meal1.DESSERT);
         int col5 = crsr.getColumnIndex(Meal1.DRINK);
 
+
         crsr.moveToFirst();
         fm.setText("First Meal: \n" + crsr.getString(col1));
         mm.setText("Main Meal: \n" + crsr.getString(col2));
@@ -162,14 +163,12 @@ public class PreviousOrders extends AppCompatActivity implements  AdapterView.On
         db = hlp.getReadableDatabase();
         crsr = db.query(Order1.TABLE_ORDERS, null, selection, selectionArgs, null, null, null);
         col1 = crsr.getColumnIndex(Order1.USER_NAME);
-        col2 = crsr.getColumnIndex(Order1.USER_ID);
         col3 = crsr.getColumnIndex(Order1.RESTAURANT_NAME);
-        col4 = crsr.getColumnIndex(Order1.RESTAURANT_ID);
         col5 = crsr.getColumnIndex(Order1.DATE);
 
         crsr.moveToFirst();
-        wkrN.setText("Worker Name: \n" + crsr.getString(col1));
-        resN.setText("Restaurant Name: \n" + crsr.getString(col3));
+        wkrN.setText("Worker: \n" + crsr.getString(col1));
+        resN.setText("Restaurant: \n" + crsr.getString(col3));
         date.setText(crsr.getString(col5));
 
 

@@ -60,18 +60,18 @@ public class newRestaurant extends AppCompatActivity {
             nameET.setError("Can't Be Empty");
             no++;
         }
-        if (!(mPhoneET.getText().length() == 10)) {
-            mPhoneET.setError("Must Be 10 Digits Long");
-            no++;
-        }
-        if (sPhoneET.getText().length() == 0) {
-            mPhoneET.setError("No");
-        }
-        else if (!(sPhoneET.getText().length() == 10)) {
-            mPhoneET.setError("Must Be 10 Digits Long");
-            no++;
-        }
+        if (!(mPhoneET.getText().length() == 10)  || mPhoneET.getText().toString().charAt(0) != '0' || !(mPhoneET.getText().toString().matches("[0-9]+") && mPhoneET.getText().toString().length() > 2)) {
 
+            mPhoneET.setError("Must Be 10 Digits Long");
+            no++;
+        }
+        if (sPhoneET.getText().toString() != "" ) {
+            if((sPhoneET.getText().length() <9 || sPhoneET.getText().toString().charAt(0)!='0'|| !(mPhoneET.getText().toString().matches("[0-9]+") && mPhoneET.getText().toString().length() > 2))){
+                sPhoneET.setError("Must Be 10 or 9 Digits Long");
+                no++;
+            }
+
+        }
 
         if(no!=0){
             Toast.makeText(this, "Error, please enter again..", Toast.LENGTH_LONG).show();

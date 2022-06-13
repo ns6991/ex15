@@ -140,22 +140,61 @@ public class WorkersList extends AppCompatActivity implements AdapterView.OnItem
             comp.setHint("company");
 
         } else if (update.getText().toString().equals("SAVE")) {
-            ContentValues cv = new ContentValues();
-            db = hlp.getWritableDatabase();
-            cv.put(Worker1.FIRST_NAME, fn.getText().toString());
-            cv.put(Worker1.LAST_NAME, ln.getText().toString());
-            cv.put(Worker1.COMPANY_NAME, comp.getText().toString());
-            cv.put(Worker1.WORKER_ID, idW.getText().toString());
-            cv.put(Worker1.PHONE_NUMBER, phN.getText().toString());
-            if(active.isChecked()) cv.put(Worker1.ACTIVE,"1");
-            else cv.put(Worker1.ACTIVE,"0");
-            db.update(Worker1.WORKERS_TABLE, cv, Worker1.KEY_ID + "=?", new String[]{userKeyId});
+            if(checkValid()){
+                ContentValues cv = new ContentValues();
+                db = hlp.getWritableDatabase();
+                cv.put(Worker1.FIRST_NAME, fn.getText().toString());
+                cv.put(Worker1.LAST_NAME, ln.getText().toString());
+                cv.put(Worker1.COMPANY_NAME, comp.getText().toString());
+                cv.put(Worker1.WORKER_ID, idW.getText().toString());
+                cv.put(Worker1.PHONE_NUMBER, phN.getText().toString());
+                if(active.isChecked()) cv.put(Worker1.ACTIVE,"1");
+                else cv.put(Worker1.ACTIVE,"0");
+                db.update(Worker1.WORKERS_TABLE, cv, Worker1.KEY_ID + "=?", new String[]{userKeyId});
 
-            db.close();
+                db.close();
 
-            Toast.makeText(this, "Saved Successfully!", Toast.LENGTH_LONG).show();
+                Toast.makeText(this, "Saved Successfully!", Toast.LENGTH_LONG).show();
+                fn.setEnabled(false);
+                ln.setEnabled(false);
+                phN.setEnabled(false);
+                comp.setEnabled(false);
+                active.setEnabled(false);
+            }
+
+
 
         }
+    }
+
+    private boolean checkValid(){
+        int no =0;
+        Boolean b1 = phN.getText().length() == 10;
+        Boolean b2 = phN.getText().toString().charAt(0)!='0';
+        Boolean b3 = phN.getText().toString().matches("[0-9]+") && phN.getText().toString().length() > 2;
+        if (!(phN.getText().length() == 10) || phN.getText().toString().charAt(0)!='0' || !(phN.getText().toString().matches("[0-9]+") && phN.getText().toString().length() > 2)) {
+            phN.setError("Must Be 10 Digits Long and start with 0");
+            no++;
+        }
+        if (fn.getText().length() == 0) {
+            fn.setError("can't be empty");
+            no++;
+        }
+        if (ln.getText().length() == 0) {
+            ln.setError("can't be empty");
+            no++;
+        }
+        if (comp.getText().length() == 0) {
+            comp.setError("can't be empty");
+            no++;
+        }
+
+
+        if(no!=0){
+            Toast.makeText(this, "Error, please enter again..", Toast.LENGTH_LONG).show();
+            return false;
+        }
+        return true;
     }
 
     public void newWorkerOC(View view) {
