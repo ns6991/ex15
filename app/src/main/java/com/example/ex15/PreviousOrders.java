@@ -91,7 +91,7 @@ public class PreviousOrders extends AppCompatActivity implements  AdapterView.On
             String rName = crsr.getString(col2);
             String uName = crsr.getString(col3);
             String date = crsr.getString(col4);
-            String tmp = "" + key + ". User: " + uName + ", Shop: " + rName + ", At " + date;
+            String tmp = "" + key + ". " + uName + ", Shop: " + rName + ", At " + date;
             tbl.add(tmp);
             cardIDs.add(key + "");
             crsr.moveToNext();

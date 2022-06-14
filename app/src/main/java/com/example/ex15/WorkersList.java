@@ -155,6 +155,7 @@ public class WorkersList extends AppCompatActivity implements AdapterView.OnItem
                 db.close();
 
                 Toast.makeText(this, "Saved Successfully!", Toast.LENGTH_LONG).show();
+                update.setText("UPDATE");
                 fn.setEnabled(false);
                 ln.setEnabled(false);
                 phN.setEnabled(false);
